@@ -12,7 +12,7 @@
 #include <curl/curl.h>
 
 
-ObjectCurl::ObjectCurl(std::string html_link) {
+ObjectCurl::ObjectCurl(std::string html_link) { // Although no direct assistance was recieved credit to stack overflow for having CURL examples
     curl = curl_easy_init();
         if (curl) {
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCurl); // Directs to WriteCurl Function
@@ -23,7 +23,6 @@ ObjectCurl::ObjectCurl(std::string html_link) {
             curl_easy_perform(curl); 
             curl_easy_cleanup(curl);
         }
-
 }
 
 std::string ObjectCurl::getData() {

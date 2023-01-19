@@ -28,21 +28,20 @@ void Link::set_ticker(std::string given_ticker) {
 bool Link::check_html() {
    
     ObjectCurl URLChecking(html_link);
-    std::string html_information = URLChecking.getData();
+    html_information = URLChecking.getData();
     std::string Error_Mesage = "Error Message";
     for(int i=0;i<13;i++) {
         if(Error_Mesage[i] != html_information[i+7]) {
           return true;  
         }
     }
-    std::cout << html_information << std::endl;
+    // std::cout << html_information << std::endl;
     return false;
-
 }
 
 std::string Link::get_html() {
     if(check_html()) {
-        return html_link;
+        return html_information;
     }
     return "N/A";
 }

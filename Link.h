@@ -15,6 +15,7 @@
 class Link {
     private:
     	std::string html_link;
+        std::string html_information;
         std::string ticker;
     public:
         /**
@@ -22,7 +23,6 @@ class Link {
          * 
          * @param HTML_LINK The html link that will be modifed and used to collect data.
          * @param TICKER The ticker of the company the html link is created for.
-         * @param VALID_HTML Bool value confirming that the html works.
          * 
         */
         Link(std::string given_ticker);

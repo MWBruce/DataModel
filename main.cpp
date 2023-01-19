@@ -4,19 +4,22 @@
 // Author:          Maxwell Bruce
 // Email:           Maxwellwallacebruce@gmail.com
 //
-// Description:     C++ main program that calls the data class
+// Description:     C++ main program that calls the Link class
 // API Key:         OJRPKNUZ0N9GFAZS
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "Link.h"
+#include "Data.h"
 #include <iostream>
 #include <cctype>
-#include "Link.h"
+#include <chrono>
 
 int main() {
-
-    std::string input_ticker;
-    std::cout << "What ticker would you like the html for? ";
-    std::cin >> input_ticker;
+    auto start = std::chrono::high_resolution_clock::now();
+    std::system("clear");
+    std::string input_ticker = "aapl";
+    // std::cout << "What ticker would you like the html for? ";
+    // std::cin >> input_ticker;
     Link stock(input_ticker); // Creates Link Object
     bool escape_selected = false; // Used to confirm that user is still wanting to search for a stock
     while(!stock.check_html() && escape_selected == false) { // Confirms valid link or that user still is searching for a stock
@@ -27,8 +30,16 @@ int main() {
             escape_selected = true;
         }
     } 
-    std::cout << stock.get_html() << std::endl;
-    std::string HTML_Link = stock.get_html();
-
+    std::string HTML_info = stock.get_html();
+    if(HTML_info != "N/A") {
+        Data DataObj(HTML_info);
+        std::vector<double> *Price_Info = DataObj.get_high_prices();
+        // for(auto i=Price_Info->begin();i<Price_Info->end();i++) {
+        //     std::cout << *i << std::endl;
+        // }
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start;
+    std::cout << diff.count() << std::endl;
     return 0;
 }
