@@ -30,13 +30,16 @@ int main() {
             escape_selected = true;
         }
     } 
+    auto middle = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff_middle = middle - start;
+    std::cout << diff_middle.count() << std::endl;
     std::string HTML_info = stock.get_html();
     if(HTML_info != "N/A") {
         Data DataObj(HTML_info);
         std::vector<double> *Price_Info = DataObj.get_high_prices();
-        // for(auto i=Price_Info->begin();i<Price_Info->end();i++) {
-        //     std::cout << *i << std::endl;
-        // }
+        for(auto i=Price_Info->begin();i<Price_Info->end();i++) {
+            std::cout << *i << std::endl;
+        }
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = end - start;
